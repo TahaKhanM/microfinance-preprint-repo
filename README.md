@@ -55,41 +55,41 @@ Both scripts expect the Excel file to be present at:
 
 ### 1) Estimating “borrowers needed” for proportional contribution
 
-The core idea is to estimate how many **new income-generating female clients** an MFI would need by a future year \(t\) to meet its *proportional* share of closing the female employment-rate gap between India and the world.
+The core idea is to estimate how many **new income-generating female clients** an MFI would need by a future year $t$ to meet its *proportional* share of closing the female employment-rate gap between India and the world.
 
 The code constructs:
 
-**New jobs needed for parity by year \(t\):**
-\[
+**New jobs needed for parity by year $t$:**
+$$
 \Delta J_t
-= W_{	ext{IN},t}\,e_{	ext{world},t}
-- W_{	ext{IN},2023}\,e_{	ext{IN},2023}
-\]
+= W_{\text{IN},t}\,e_{\text{world},t}
+- W_{\text{IN},2023}\,e_{\text{IN},2023}
+$$
 where:
-- \(W_{	ext{IN},t}\) is India’s working-age female population (projected),
-- \(e_{	ext{world},t}\) is the world female employment rate (projected),
-- \(e_{	ext{IN},2023}\) is treated as a static baseline (2023).
+- $W_{\text{IN},t}$ is India’s working-age female population (projected),
+- $e_{\text{world},t}$ is the world female employment rate (projected),
+- $e_{\text{IN},2023}$ is treated as a static baseline (2023).
 
-**Proportional share for MFI \(i\)** is proxied using branch share:
-\[
-lpha_i = rac{b_i}{B}
-\]
-where \(b_i\) is the MFI’s number of branches and \(B\) is total MFI branches.
+**Proportional share for MFI $i$** is proxied using branch share:
+$$
+\alpha_i = \frac{b_i}{B}
+$$
+where $b_i$ is the MFI’s number of branches and $B$ is total MFI branches.
 
 The final “borrowers needed” estimate used in the scripts is:
-\[
+$$
 N_{i,t}
-= rac{\Delta J_t \cdot s_t \cdot m_t \cdot lpha_i}{p^{(f)}_i\,p^{(ig)}_i}
-\]
+= \frac{\Delta J_t \cdot s_t \cdot m_t \cdot \alpha_i}{p^{(f)}_i\,p^{(ig)}_i}
+$$
 where:
-- \(s_t\) is the self-employment rate (projected),
-- \(m_t\) is microfinance market-share of borrowers (projected),
-- \(p^{(f)}_i\) is proportion of female borrowers (defaults to 0.99 if missing),
-- \(p^{(ig)}_i\) is proportion of income-generating loans (defaults to 0.985 if missing).
+- $s_t$ is the self-employment rate (projected),
+- $m_t$ is microfinance market-share of borrowers (projected),
+- $p^{(f)}_i$ is proportion of female borrowers (defaults to 0.99 if missing),
+- $p^{(ig)}_i$ is proportion of income-generating loans (defaults to 0.985 if missing).
 
 The code then:
 - projects each MFI’s borrower growth, forms a **cumulative change in borrowers**, and
-- compares it to \(N_{i,t}\) for 2024–2030 via a (scaled) difference curve.
+- compares it to $N_{i,t}$ for 2024–2030 via a (scaled) difference curve.
 
 Summing across the surveyed MFIs, the preprint reports that the **first year the total scaled difference turns positive is 2028**, suggesting that *if trends persist and there are no large shocks*, MFIs could meet their proportional contribution by then.
 
@@ -117,11 +117,10 @@ Key patterns discussed in the preprint:
 ### Polynomial regression for projections
 
 Both scripts use the same approach to project time series:
-- Try polynomial degrees up to **3** (to mitigate overfitting),
-- Choose the degree with the best \(R^2\),
-- In some cases, reduce degree further (e.g., if a “percentage” projection exceeds 100%).
+- Try polynomial degrees up to a capped maximum (default **5**).
+- Pick the degree with the best in-sample $R^2$, with simple guardrails to reduce overfitting and avoid nonsensical extrapolations (e.g., rate-like projections above 100%).
 
-This is implemented via `PolynomialFeatures` + `LinearRegression` and selecting the best model via in-sample \(R^2\).
+This is implemented via `PolynomialFeatures` + `LinearRegression` and selecting the best model via in-sample $R^2$.
 
 ---
 
@@ -129,7 +128,7 @@ This is implemented via `PolynomialFeatures` + `LinearRegression` and selecting 
 
 ### Regression & model selection
 - Implementing **polynomial regression** in scikit-learn using feature expansion (`PolynomialFeatures`) and fitting linear models on the transformed design matrix.
-- Using **\(R^2\)** as a simple fit criterion across candidate model degrees, and imposing a **degree cap** to reduce overfitting risk in short time series.
+- Using **$R^2$** as a simple fit criterion across candidate model degrees, and imposing a **degree cap** to reduce overfitting risk in short time series.
 - Adding practical constraints for “bounded” variables (e.g., keeping rate-like series below 100%) to avoid nonsense extrapolations.
 
 ### Data handling in Python
