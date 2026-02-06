@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+*.csv
+*.parquet
+*.pkl
+*.log
+venv/
+.venv/
+env/
+.env/
