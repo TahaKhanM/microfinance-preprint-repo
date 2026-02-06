@@ -4,6 +4,7 @@ This repository contains the code and data used for the preprint:
 
 - **“A Detailed Study Examining The Current Contributions Of Microfinance Institutions In Closing The Female Employment Gap Between India And The World …”** (Oct 10, 2024)  
   See: `papers/Microfinancepreprintfinalasof10thoct.pdf`
+  Link: `https://www.researchgate.net/publication/384801369_A_Detailed_Study_Examining_The_Current_Contributions_Of_Microfinance_Institutions_In_Closing_The_Female_Employment_Gap_Between_India_And_The_World_And_How_Indian_Microfinance_Institutions_Can_Better_A`
 
 The project combines:
 1) **a borrower-growth model** to estimate when large Indian MFIs could *proportionally* meet their share of closing the India–world female employment-rate gap, and  
