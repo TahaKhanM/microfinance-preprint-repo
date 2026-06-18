@@ -9,8 +9,10 @@ This repository contains the code and data used for the preprint:
   `https://www.researchgate.net/publication/384801369_A_Detailed_Study_Examining_The_Current_Contributions_Of_Microfinance_Institutions_In_Closing_The_Female_Employment_Gap_Between_India_And_The_World_And_How_Indian_Microfinance_Institutions_Can_Better_A`
 
 The project combines:
-1) **a borrower-growth model** to estimate when large Indian MFIs could *proportionally* meet their share of closing the India–world female employment-rate gap and  
+1) **a borrower-growth model** to estimate when large Indian MFIs could *proportionally* meet their share of closing the India-world female employment-rate gap and
 2) **an operational/management-practices analysis** linking branch utilization, loan sizes and costs to effectiveness in narrowing the gap.
+
+Portfolio role: this repo shows a pandas/scikit-learn research workflow, with explicit modelling assumptions, projections and limitations rather than a production causal model.
 
 ---
 
@@ -155,3 +157,11 @@ The preprint discusses simplifying assumptions, including:
 - treating branches as uniform in output/efficiency,
 - using polynomial regression for extrapolation (with guardrails) and
 - surveying a subset of the full market (large MFIs / ~60% coverage).
+
+The scripts are best read as reproducible exploratory analysis for the preprint. They should not be treated as proof of causality or as policy recommendations without further robustness checks.
+
+## Future improvements
+
+- Convert notebook-transcribed scripts into smaller, testable functions.
+- Add a generated `outputs/` folder with saved charts/tables from a clean run.
+- Add sensitivity analysis for branch-share assumptions, polynomial degree and missing company-level parameters.
