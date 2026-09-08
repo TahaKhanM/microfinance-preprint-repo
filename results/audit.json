@@ -1,0 +1,776 @@
+{
+  "workbook_sha256": "423ec74d618e66d5b8fcb1e19eaa724ddcc19cdcabd06319966bec3685a2144f",
+  "cutoff": 2020,
+  "scenario_baseline": 2023,
+  "female_share": 0.99,
+  "income_share": 0.985,
+  "versions": {
+    "python": "3.13.12",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "sklearn": "1.9.0"
+  },
+  "models": {
+    "workingAgesFemaleIndia": {
+      "model": "quadratic",
+      "development_cases": 17,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 8449359.461538462,
+        "linear": 441922.4214443794,
+        "quadratic": 243155.73318861538,
+        "cubic": 248811.91242279456
+      },
+      "holdout_mae": 4623835.284829755,
+      "last_value_holdout_mae": 13489170.666666666
+    },
+    "totalBranches": {
+      "model": "quadratic",
+      "development_cases": 8,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 2562.75,
+        "linear": 3212.920238095238,
+        "quadratic": 2437.316071428571,
+        "cubic": 4362.411904762022
+      },
+      "holdout_mae": 4012.716269841267,
+      "last_value_holdout_mae": 3688.0
+    },
+    "selfEmploymentIndia": {
+      "model": "cubic",
+      "development_cases": 17,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.9957554669764455,
+        "linear": 1.273618313536415,
+        "quadratic": 0.9031262384459233,
+        "cubic": 0.8862076981944988
+      },
+      "holdout_mae": 1.7020381571714107,
+      "last_value_holdout_mae": 1.1639217180648653
+    },
+    "mfiMarketshare": {
+      "model": "linear",
+      "development_cases": 14,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 5.131485127880212,
+        "linear": 5.095649604226057,
+        "quadratic": 6.584251227656386,
+        "cubic": 11.434016523635156
+      },
+      "holdout_mae": 4.105294795608825,
+      "last_value_holdout_mae": 4.706877565378605
+    },
+    "employmentRateWorld": {
+      "model": "last_value",
+      "development_cases": 22,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.2629344499999999,
+        "linear": 0.40503403804491633,
+        "quadratic": 0.46752823361022816,
+        "cubic": 0.5461832594727775
+      },
+      "holdout_mae": 2.427178226666669,
+      "last_value_holdout_mae": 2.427178226666669
+    },
+    "employmentRateIndia": {
+      "model": "last_value",
+      "development_cases": 22,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.23445008055555544,
+        "linear": 0.34913700851564083,
+        "quadratic": 0.4199381339214177,
+        "cubic": 0.37580513105904856
+      },
+      "holdout_mae": 3.5883444799999986,
+      "last_value_holdout_mae": 3.5883444799999986
+    },
+    "annapurnaBorrowers": {
+      "model": "cubic",
+      "development_cases": 9,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 283672.8,
+        "linear": 223840.69999999995,
+        "quadratic": 119474.63571428577,
+        "cubic": 60172.35714285031
+      },
+      "holdout_mae": 240299.24891775846,
+      "last_value_holdout_mae": 453239.3333333333
+    },
+    "annapurnaBranches": {
+      "model": "quadratic",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 172.0,
+        "linear": 110.40000000000003,
+        "quadratic": 60.599999999999966,
+        "cubic": 97.19999999999959
+      },
+      "holdout_mae": 213.19047619047635,
+      "last_value_holdout_mae": 294.3333333333333
+    },
+    "annapurnaAverageLoanSize": {
+      "model": "linear",
+      "development_cases": 7,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.00028862466692884415,
+        "linear": 0.00018141698563893687,
+        "quadratic": 0.000465529747077597,
+        "cubic": 0.0012778937236927617
+      },
+      "holdout_mae": 0.0004339727837923278,
+      "last_value_holdout_mae": 0.00044866706272561147
+    },
+    "annapurnaExpensePerBorrower": {
+      "model": "linear",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.009738546505090102,
+        "linear": 0.0078102392222541145,
+        "quadratic": 0.020985032963213385,
+        "cubic": 0.08339442677183476
+      },
+      "holdout_mae": 0.0317724283252773,
+      "last_value_holdout_mae": 0.006522808967863769
+    },
+    "annapurnaBorrowersPerBranch": {
+      "model": "last_value",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 380.95982974096205,
+        "linear": 723.342151684709,
+        "quadratic": 746.6068265835956,
+        "cubic": 461.0771569185049
+      },
+      "holdout_mae": 257.72438847131417,
+      "last_value_holdout_mae": 257.72438847131417
+    },
+    "chaitanyaBorrowers": {
+      "model": "quadratic",
+      "development_cases": 10,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 63501.666666666664,
+        "linear": 67420.05925925926,
+        "quadratic": 14200.870238095238,
+        "cubic": 24040.709788360193
+      },
+      "holdout_mae": 251205.26969696977,
+      "last_value_holdout_mae": 470854.3333333333
+    },
+    "chaitanyaBranches": {
+      "model": "quadratic",
+      "development_cases": 10,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 34.333333333333336,
+        "linear": 31.776058201058195,
+        "quadratic": 11.091865079365059,
+        "cubic": 20.43306878306823
+      },
+      "holdout_mae": 150.01414141414142,
+      "last_value_holdout_mae": 252.33333333333334
+    },
+    "chaitanyaAverageLoanSize": {
+      "model": "quadratic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.0003455938029174204,
+        "linear": 0.0002993397842329542,
+        "quadratic": 0.0002840749914343444,
+        "cubic": 0.0019274887349863025
+      },
+      "holdout_mae": 0.000453178238314715,
+      "last_value_holdout_mae": 0.000557536188347605
+    },
+    "chaitanyaExpensePerBorrower": {
+      "model": "cubic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.010143188505097142,
+        "linear": 0.006732949024982983,
+        "quadratic": 0.025271919770915904,
+        "cubic": 0.0020819990446384884
+      },
+      "holdout_mae": 0.11950430400113367,
+      "last_value_holdout_mae": 0.01890795904327461
+    },
+    "chaitanyaBorrowersPerBranch": {
+      "model": "linear",
+      "development_cases": 10,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 143.12863569827968,
+        "linear": 106.51757404615944,
+        "quadratic": 282.38390155801807,
+        "cubic": 590.8462490910223
+      },
+      "holdout_mae": 169.11845577742739,
+      "last_value_holdout_mae": 88.44467874834724
+    },
+    "muthootBorrowers": {
+      "model": "cubic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 288000.0,
+        "linear": 169500.0,
+        "quadratic": 63250.000000000466,
+        "cubic": 1999.9999999976717
+      },
+      "holdout_mae": 390990.4761904785,
+      "last_value_holdout_mae": 361666.6666666667
+    },
+    "muthootBranches": {
+      "model": "linear",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 135.0,
+        "linear": 8.499999999999886,
+        "quadratic": 152.75,
+        "cubic": 149.99999999999955
+      },
+      "holdout_mae": 69.13333333333333,
+      "last_value_holdout_mae": 252.0
+    },
+    "muthootAverageLoanSize": {
+      "model": "linear",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.0006895192324660338,
+        "linear": 0.0006474428912417729,
+        "quadratic": 0.0010098192402353857,
+        "cubic": 0.0022192267675347414
+      },
+      "holdout_mae": 0.0005543922824918832,
+      "last_value_holdout_mae": 0.0005332418648546391
+    },
+    "muthootExpensePerBorrower": {
+      "model": "linear",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.014895362099764099,
+        "linear": 0.001583369542543199,
+        "quadratic": 0.027747306748388698,
+        "cubic": 0.07590764286429279
+      },
+      "holdout_mae": 0.018572289688121867,
+      "last_value_holdout_mae": 0.005165898662641347
+    },
+    "muthootBorrowersPerBranch": {
+      "model": "last_value",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 142.4564917342077,
+        "linear": 618.5152592811978,
+        "quadratic": 611.195246098041,
+        "cubic": 782.6337358305877
+      },
+      "holdout_mae": 357.5591179398871,
+      "last_value_holdout_mae": 357.5591179398871
+    },
+    "belstarBorrowers": {
+      "model": "quadratic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 406000.0,
+        "linear": 265500.0,
+        "quadratic": 40499.99999999977,
+        "cubic": 186999.9999999986
+      },
+      "holdout_mae": 598090.1428571438,
+      "last_value_holdout_mae": 530767.0
+    },
+    "belstarBranches": {
+      "model": "quadratic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 203.0,
+        "linear": 124.0,
+        "quadratic": 15.249999999999773,
+        "cubic": 136.99999999999932
+      },
+      "holdout_mae": 448.819047619048,
+      "last_value_holdout_mae": 112.33333333333333
+    },
+    "satinBorrowers": {
+      "model": "quadratic",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 199470.0,
+        "linear": 559402.3,
+        "quadratic": 142562.80000000028,
+        "cubic": 830037.7000000026
+      },
+      "holdout_mae": 402619.0357142855,
+      "last_value_holdout_mae": 433497.3333333333
+    },
+    "satinBranches": {
+      "model": "linear",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 194.0,
+        "linear": 65.20000000000005,
+        "quadratic": 81.79999999999995,
+        "cubic": 327.20000000000005
+      },
+      "holdout_mae": 607.7523809523813,
+      "last_value_holdout_mae": 127.33333333333333
+    },
+    "satinAverageLoanSize": {
+      "model": "linear",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 1.885710010263045e-05,
+        "linear": 3.3741726594933093e-06,
+        "quadratic": 0.00012636734592343704,
+        "cubic": 8.120109231464365e-05
+      },
+      "holdout_mae": 0.002206292814485744,
+      "last_value_holdout_mae": 0.0022973717005379236
+    },
+    "satinExpensePerBorrower": {
+      "model": "quadratic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.004668668779201746,
+        "linear": 0.0022333257659757563,
+        "quadratic": 0.0005233097520349825,
+        "cubic": 0.0014581101470571844
+      },
+      "holdout_mae": 0.0038129721252271828,
+      "last_value_holdout_mae": 0.013700408628220232
+    },
+    "satinBorrowersPerBranch": {
+      "model": "linear",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 303.465036680147,
+        "linear": 269.788006661714,
+        "quadratic": 481.53918354000666,
+        "cubic": 1113.8361788213733
+      },
+      "holdout_mae": 901.503438568304,
+      "last_value_holdout_mae": 120.98853239014413
+    },
+    "creditaccessBorrowers": {
+      "model": "quadratic",
+      "development_cases": 9,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 410169.6,
+        "linear": 290543.5176190475,
+        "quadratic": 150731.7407142857,
+        "cubic": 227462.1457143038
+      },
+      "holdout_mae": 476939.31168831186,
+      "last_value_holdout_mae": 1091630.6666666667
+    },
+    "creditaccessBranches": {
+      "model": "quadratic",
+      "development_cases": 9,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 138.2,
+        "linear": 139.10857142857145,
+        "quadratic": 27.19285714285718,
+        "cubic": 43.96952380952642
+      },
+      "holdout_mae": 215.4562770562768,
+      "last_value_holdout_mae": 686.0
+    },
+    "creditaccessAverageLoanSize": {
+      "model": "last_value",
+      "development_cases": 7,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.0004100377245053125,
+        "linear": 0.0008557175596755742,
+        "quadratic": 0.0008977248942346381,
+        "cubic": 0.0014789476577611576
+      },
+      "holdout_mae": 0.0006694038360855627,
+      "last_value_holdout_mae": 0.0006694038360855627
+    },
+    "creditaccessBorrowersPerBranch": {
+      "model": "last_value",
+      "development_cases": 9,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 302.0694915504474,
+        "linear": 805.6630292366706,
+        "quadratic": 484.5363421076321,
+        "cubic": 572.1437614585733
+      },
+      "holdout_mae": 637.9249441839041,
+      "last_value_holdout_mae": 637.9249441839041
+    },
+    "asirvadBorrowers": {
+      "model": "quadratic",
+      "development_cases": 9,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 349400.0,
+        "linear": 238115.23809523805,
+        "quadratic": 135782.14285714313,
+        "cubic": 317497.14285713254
+      },
+      "holdout_mae": 688432.0346320352,
+      "last_value_holdout_mae": 365333.3333333333
+    },
+    "asirvadBranches": {
+      "model": "linear",
+      "development_cases": 8,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 168.5,
+        "linear": 145.25119047619046,
+        "quadratic": 282.5125000000001,
+        "cubic": 270.2333333333587
+      },
+      "holdout_mae": 259.0714285714286,
+      "last_value_holdout_mae": 125.0
+    },
+    "spandanassphoortyBorrowers": {
+      "model": "last_value",
+      "development_cases": 7,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 479333.3333333333,
+        "linear": 584188.888888889,
+        "quadratic": 520150.0,
+        "cubic": 756622.2222222226
+      },
+      "holdout_mae": 214477.33333333334,
+      "last_value_holdout_mae": 214477.33333333334
+    },
+    "spandanassphoortyBranches": {
+      "model": "cubic",
+      "development_cases": 7,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 151.0,
+        "linear": 559.3,
+        "quadratic": 335.6166666666668,
+        "cubic": 98.51111111111102
+      },
+      "holdout_mae": 780.8809523807026,
+      "last_value_holdout_mae": 82.33333333333333
+    },
+    "spandanassphoortyAverageLoanSize": {
+      "model": "last_value",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.00025074294845842376,
+        "linear": 0.0009771193606215524,
+        "quadratic": 0.0009170884326464954,
+        "cubic": 0.0025306690530598076
+      },
+      "holdout_mae": 0.0009131201085438852,
+      "last_value_holdout_mae": 0.0009131201085438852
+    },
+    "spandanassphoortyExpensePerBorrower": {
+      "model": "last_value",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.027523539117520465,
+        "linear": 0.028667984543819705,
+        "quadratic": 0.03641088239948728,
+        "cubic": 0.036323312256947876
+      },
+      "holdout_mae": 0.016453452686199414,
+      "last_value_holdout_mae": 0.016453452686199414
+    },
+    "spandanassphoortyBorrowersPerBranch": {
+      "model": "last_value",
+      "development_cases": 7,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 250.94807975828644,
+        "linear": 370.1800245115308,
+        "quadratic": 323.35391217108025,
+        "cubic": 1226.455535295818
+      },
+      "holdout_mae": 388.6687486861242,
+      "last_value_holdout_mae": 388.6687486861242
+    },
+    "fusionfinanceBorrowers": {
+      "model": "quadratic",
+      "development_cases": 7,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 391324.0,
+        "linear": 256176.4777777777,
+        "quadratic": 130879.6500000001,
+        "cubic": 242901.7333333336
+      },
+      "holdout_mae": 256548.4444444451,
+      "last_value_holdout_mae": 966737.6666666666
+    },
+    "fusionfinanceBranches": {
+      "model": "quadratic",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 127.5,
+        "linear": 70.64999999999998,
+        "quadratic": 26.47500000000005,
+        "cubic": 63.300000000000324
+      },
+      "holdout_mae": 136.13095238095255,
+      "last_value_holdout_mae": 241.0
+    },
+    "fusionfinanceAverageLoanSize": {
+      "model": "last_value",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 5.845201929601321e-05,
+        "linear": 0.00013679131761104037,
+        "quadratic": 0.0003739081493798599,
+        "cubic": 0.0013457486570032174
+      },
+      "holdout_mae": 0.0003328638832142865,
+      "last_value_holdout_mae": 0.0003328638832142865
+    },
+    "fusionfinanceExpensePerBorrower": {
+      "model": "linear",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 0.005928222574136298,
+        "linear": 0.00042418628483557874,
+        "quadratic": 0.016368824106028638,
+        "cubic": 0.024928035612805405
+      },
+      "holdout_mae": 0.005112280422606631,
+      "last_value_holdout_mae": 0.01061079618381746
+    },
+    "fusionfinanceBorrowersPerBranch": {
+      "model": "linear",
+      "development_cases": 6,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 412.3640532417503,
+        "linear": 358.1716484472049,
+        "quadratic": 2364.865830963957,
+        "cubic": 6850.591656691757
+      },
+      "holdout_mae": 1084.5164857709344,
+      "last_value_holdout_mae": 129.65881478900428
+    },
+    "bandhanBorrowers": {
+      "model": "quadratic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 360000.0,
+        "linear": 130000.00000000023,
+        "quadratic": 45000.0,
+        "cubic": 149999.99999999767
+      },
+      "holdout_mae": 321714.2857142864,
+      "last_value_holdout_mae": 633333.3333333334
+    },
+    "bandhanBranches": {
+      "model": "cubic",
+      "development_cases": 5,
+      "holdout_cases": 3,
+      "development_last_year": 2020,
+      "holdout_first_year": 2021,
+      "cv_mae": {
+        "last_value": 32.0,
+        "linear": 108.0,
+        "quadratic": 59.5,
+        "cubic": 13.999999999999545
+      },
+      "holdout_mae": 39.800000000000715,
+      "last_value_holdout_mae": 231.0
+    }
+  },
+  "unavailable": {
+    "creditaccessExpensePerBorrower": "need >=5 development observations and >=1 holdout observation"
+  },
+  "forecast_flags": [
+    {
+      "series": "satinBorrowers",
+      "year": 2027,
+      "value": -239959.34112554207,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "satinBorrowers",
+      "year": 2028,
+      "value": -1256023.5298701318,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "satinBorrowers",
+      "year": 2029,
+      "value": -2408575.787878791,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "satinBorrowers",
+      "year": 2030,
+      "value": -3697616.115151519,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "satinBorrowersPerBranch",
+      "year": 2029,
+      "value": -274.92095572375183,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "satinBorrowersPerBranch",
+      "year": 2030,
+      "value": -594.5534369901625,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "spandanassphoortyBranches",
+      "year": 2026,
+      "value": -588.6545454545205,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "spandanassphoortyBranches",
+      "year": 2027,
+      "value": -1787.8083916083626,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "spandanassphoortyBranches",
+      "year": 2028,
+      "value": -3402.1790209789824,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "spandanassphoortyBranches",
+      "year": 2029,
+      "value": -5486.465734265675,
+      "reason": "outside natural domain"
+    },
+    {
+      "series": "spandanassphoortyBranches",
+      "year": 2030,
+      "value": -8095.367832167761,
+      "reason": "outside natural domain"
+    }
+  ]
+}
