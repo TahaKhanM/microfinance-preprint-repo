@@ -1,12 +1,5 @@
+.venv/
 __pycache__/
+.pytest_cache/
 *.pyc
 .DS_Store
-.ipynb_checkpoints/
-*.csv
-*.parquet
-*.pkl
-*.log
-venv/
-.venv/
-env/
-.env/

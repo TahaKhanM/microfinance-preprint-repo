@@ -1,157 +1,73 @@
-# Microfinance & the Female Employment Gap (India)
+# Microfinance and borrower-growth research
 
-This repository contains the code and data used for the preprint:
+An exploratory study of Indian microfinance institutions with a reproducible forecast audit. The analysis compares polynomial forecasts with a last-observation baseline, measures errors on later years and flags projections outside their natural domain.
 
-- **“A Detailed Study Examining The Current Contributions Of Microfinance Institutions In Closing The Female Employment Gap Between India And The World …”** (Oct 10, 2024)  
-  See: `papers/Microfinancepreprintfinalasof10thoct.pdf`
+The audit evaluates **46 series**. Selected models beat persistence on held-out mean absolute error for **19**, while the future extrapolations contain **11 invalid values**. Keeping these results visible is central to the project: a smooth historical fit can still make a poor forecast.
 
-  Link:
-  `https://www.researchgate.net/publication/384801369_A_Detailed_Study_Examining_The_Current_Contributions_Of_Microfinance_Institutions_In_Closing_The_Female_Employment_Gap_Between_India_And_The_World_And_How_Indian_Microfinance_Institutions_Can_Better_A`
+The [2024 preprint](papers/Microfinancepreprintfinalasof10thoct.pdf) is by **Shiv Barua, Koby Reiss Din, Taha Khan and Jack Wickham**. The forecast audit is later work. The original paper's borrower-growth scenario does not establish that loans create jobs or close an employment gap.
 
-The project combines:
-1) **a borrower-growth model** to estimate when large Indian MFIs could *proportionally* meet their share of closing the India–world female employment-rate gap and  
-2) **an operational/management-practices analysis** linking branch utilization, loan sizes and costs to effectiveness in narrowing the gap.
+## Reproduce the audit
 
----
-
-## Repository contents
-
-- `src/male_employment_gap_modelling_code.py`  
-  Projections + “borrowers needed” model + trend classification (positive/negative/no-trend).
-- `src/microfinance_management_practices_code.py`  
-  Operational metrics comparison between positive vs negative companies (loan size, expense per borrower, borrowers per branch).
-- `Microfinance Data 21.xlsx`  
-  Consolidated dataset used by both scripts.
-- `papers/`  
-  The preprint PDF + the original notebook-to-PDF code exports.
-- `notebooks_pdf_exports/`  
-  The two PDF “code exports” these scripts were transcribed from.
-
-> Note: The Python scripts are intended as a direct transcription of the notebook code exported to PDF. They are not “refactored” into a package on purpose, to keep the implementation aligned with what was written during the project.
-
----
-
-## Quickstart
+Python 3.11+:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
-pip install -r requirements.txt
+source .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+python -m src.analysis --output results/my-run
 ```
 
-Run the analyses:
+The workbook is included; no credentials, downloads or GUI are required. Paths are resolved relative to the project, so the analysis does not depend on an implicit working-directory spreadsheet lookup.
+
+The [committed results](results/) contain:
+
+| File | What to inspect |
+| --- | --- |
+| `audit.json` | Model choice, every candidate's cross-validation MAE, holdout errors, missing series, domain flags, library versions and workbook SHA-256 |
+| `holdout.csv` | Actual and predicted values for each held-out year, alongside persistence |
+| `forecasts.csv` | Raw 2024–2030 extrapolations after refitting the selected model |
+| `borrower-scenarios.csv` | Per-company growth and required-borrower accounting or a specific reason it cannot be computed |
+| `operations-observed.csv` | Observed operating metrics indexed to each company's 2017 value |
+
+## Forecast methodology
+
+[forecasting.py](src/forecasting.py) compares persistence with linear, quadratic and cubic models. Expanding-window validation uses only earlier observations to predict each next observation. Mean absolute error selects the candidate, with ties favouring the simpler model.
+
+Selection ends in 2020. The chosen model is fitted to that period and assessed on available 2021–2023 observations without updating it during the holdout. Only then is it refitted on all observations for the 2024–2030 scenario.
+
+The code preserves actual years when dropping missing data and centres dates before polynomial expansion. Series need at least five development observations. Errors retain workbook units, so they should not be averaged across unrelated metrics.
+
+## The borrower accounting scenario
+
+For future working-age female population $W_t$, world employment rate $e_t$ and observed 2023 baseline population and Indian employment rate $W_0,e_0$, the model uses:
+
+$$J_t = \max(0, W_t e_t - W_0 e_0), \qquad N_{i,t} = \frac{J_t s_t m_t \alpha_i}{p_f p_{ig}}.$$
+
+Here $s_t$ is self-employment share, $m_t$ is microfinance market share and $\alpha_i$ is the company's **observed 2023 branch share**, held fixed. The defaults $p_f=0.99$ and $p_{ig}=0.985$ are explicit scenario assumptions inherited from the historical model, not newly estimated company parameters. Rate columns expressed as percentages are divided by 100; all scenario shares must be within `[0,1]`, with positive denominators. Negative projected borrower counts and invalid rate projections produce unavailable scenarios.
+
+The comparison is projected borrowers minus **observed 2023 borrowers**, against $N_{i,t}$. This replaces the original positional slices and fitted baseline that made year interpretation fragile. It also avoids summing independently scaled company gaps: such a sum is neither total borrowers nor total jobs.
+
+Explore sensitivity explicitly:
 
 ```bash
-python src/male_employment_gap_modelling_code.py
-python src/microfinance_management_practices_code.py
+python -m src.analysis --female-share 0.95 --income-share 0.80 --output results/sensitivity
 ```
 
-Both scripts expect the Excel file to be present at:
+Holding everything else fixed, a lower assumed income-generating share raises the required borrower count inversely. Neither “income-generating loan” nor “female borrower” establishes an additional job. The scenario has no counterfactual, borrower-level outcomes, identification strategy, default/loss process or double-borrowing adjustment. Branch share also assumes comparable branches and is only a proxy for responsibility or capacity.
 
-```text
-./Microfinance Data 21.xlsx
-```
+## Data and verification
 
----
+The included workbook has 25 annual rows from 1999 to 2023 and 79 data columns. The audit selects six macro series and available operating series for ten institutions. Operating comparisons use observed data indexed to each company's 2017 baseline.
 
-## What the research is doing
+Tests change holdout values and verify that model selection remains unchanged. They also cover missing years, rolling baselines, percentage arithmetic, scenario sensitivity and workbook coverage. CI runs the complete analysis.
 
-### 1) Estimating “borrowers needed” for proportional contribution
+Some source definitions and currency scales still need reconciliation against annual statements. Normalising a series does not repair a unit error. The borrower scenario has no counterfactual or borrower-level outcomes and assumes fixed branch shares. Its outputs are accounting scenarios rather than causal estimates or validated long-term forecasts.
 
-The core idea is to estimate how many **new income-generating female clients** an MFI would need by a future year $t$ to meet its *proportional* share of closing the female employment-rate gap between India and the world.
+## Original work
 
-The code constructs:
+- [Preprint](papers/Microfinancepreprintfinalasof10thoct.pdf)
+- [Original employment script](historical/male_employment_gap_modelling_code.py) and [management comparison](historical/microfinance_management_practices_code.py)
+- [Notebook PDF exports](notebooks_pdf_exports/)
 
-**New jobs needed for parity by year $t$:**
-$$
-\Delta J_t
-= W_{\text{IN},t}\,e_{\text{world},t}
-- W_{\text{IN},2023}\,e_{\text{IN},2023}
-$$
-where:
-- $W_{\text{IN},t}$ is India’s working-age female population (projected),
-- $e_{\text{world},t}$ is the world female employment rate (projected),
-- $e_{\text{IN},2023}$ is treated as a static baseline (2023).
-
-**Proportional share for MFI $i$** is proxied using branch share:
-$$
-\alpha_i = \frac{b_i}{B}
-$$
-where $b_i$ is the MFI’s number of branches and $B$ is total MFI branches.
-
-The final “borrowers needed” estimate used in the scripts is:
-$$
-N_{i,t}
-= \frac{\Delta J_t \cdot s_t \cdot m_t \cdot \alpha_i}{p^{(f)}_i\,p^{(ig)}_i}
-$$
-where:
-- $s_t$ is the self-employment rate (projected),
-- $m_t$ is microfinance market-share of borrowers (projected),
-- $p^{(f)}_i$ is proportion of female borrowers (defaults to 0.99 if missing),
-- $p^{(ig)}_i$ is proportion of income-generating loans (defaults to 0.985 if missing).
-
-The code then:
-- projects each MFI’s borrower growth, forms a **cumulative change in borrowers** and
-- compares it to $N_{i,t}$ for 2024–2030 via a (scaled) difference curve.
-
-Summing across the surveyed MFIs, the preprint reports that the **first year the total scaled difference turns positive is 2028**, suggesting that *if trends persist and there are no large shocks*, MFIs could meet their proportional contribution by then.
-
-### 2) Linking management practices to impact
-
-MFIs are grouped by whether their borrower-projection-vs-needed curves show:
-- an **upward** trend,
-- a **downward** trend or
-- no clear trend.
-
-The management-practices script then compares (normalized and summed across groups):
-- **Average loan size**
-- **Expense per borrower** (a proxy for LRAC-style operational efficiency)
-- **Borrowers per branch** (branch utilization / “crowded vs underutilized”)
-
-Key patterns discussed in the preprint:
-- Positive-trend MFIs tend to have **lower expense per borrower**, consistent with leveraging economies of scale more effectively.
-- Underutilized branches (lower borrowers/branch) correlate with reduced effectiveness, while MFIs operating **fewer but larger branches** tend to contribute more to narrowing the gap.
-- Positive-trend MFIs are associated with **larger average loan sizes**, interpreted as supporting more sustainable micro-enterprise success and longer-run employment effects.
-
----
-
-## Modelling details
-
-### Polynomial regression for projections
-
-Both scripts use the same approach to project time series:
-- Try polynomial degrees up to a capped maximum (default **5**).
-- Pick the degree with the best in-sample $R^2$, with simple guardrails to reduce overfitting and avoid nonsensical extrapolations (e.g., rate-like projections above 100%).
-
-This is implemented via `PolynomialFeatures` + `LinearRegression` and selecting the best model via in-sample $R^2$.
-
----
-
-## What was learned building this project (technical)
-
-### Regression & model selection
-- Implementing **polynomial regression** in scikit-learn using feature expansion (`PolynomialFeatures`) and fitting linear models on the transformed design matrix.
-- Using **$R^2$** as a simple fit criterion across candidate model degrees and imposing a **degree cap** to reduce overfitting risk in short time series.
-- Adding practical constraints for “bounded” variables (e.g., keeping rate-like series below 100%) to avoid nonsense extrapolations.
-
-### Data handling in Python
-- Reading and managing multi-column time-series data from Excel with **pandas** (`pd.ExcelFile`, `pd.read_excel`) and aligning indices to years.
-- Handling missingness using `dropna()`, boolean masks and `np.isnan` filtering so comparisons across companies don’t break when reporting windows differ.
-
-### Comparative analysis & normalization
-- Making cross-company comparisons fair by **normalizing each company’s metric by its own max** over the observed horizon, then aggregating within groups (positive vs negative).
-- Designing plots that reveal operational differences in *level* vs *shape* (e.g., borrowers/branch trajectories).
-
-### Practical workflow learnings
-- Consolidating disparate public sources into one reproducible workbook makes analysis far easier to share and review.
-- Exporting notebooks to PDFs is convenient for publication, but for reproducibility it helps to also maintain runnable scripts (this repo) and pin dependencies.
-
----
-
-## Caveats / assumptions
-
-The preprint discusses simplifying assumptions, including:
-- using industry averages for some missing company-level parameters,
-- treating branches as uniform in output/efficiency,
-- using polynomial regression for extrapolation (with guardrails) and
-- surveying a subset of the full market (large MFIs / ~60% coverage).
+The historical files remain unchanged. Use `python -m src.analysis` for the supported analysis.
